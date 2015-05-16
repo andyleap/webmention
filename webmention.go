@@ -77,7 +77,7 @@ func (wm *WebMention) SendNotification(target *url.URL, source *url.URL) {
 		fmt.Println(err)
 		return
 	}
-	var values url.Values
+	values := make(url.Values)
 	values.Set("source", source.String())
 	values.Set("target", target.String())
 	http.PostForm(endpoint.String(), values)
