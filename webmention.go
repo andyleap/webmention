@@ -17,7 +17,7 @@ import (
 type WebMention struct {
 	mentionQueue chan *mention
 	timer        *time.Timer
-	Mention      func(source, target *url.URL)
+	Mention      func(source, target *url.URL, sourceData *microformats.Data)
 }
 
 func New() *WebMention {
@@ -115,7 +115,9 @@ func (wm *WebMention) process() {
 
 	found := searchLinks(body, mention.target)
 	if found {
-		wm.Mention(mention.source, mention.target)
+		p := microformats.New()
+		data := p.ParseNode(body)
+		wm.Mention(mention.source, mention.target, data)
 	}
 }
 
