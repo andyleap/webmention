@@ -77,6 +77,9 @@ func (wm *WebMention) SendNotification(target *url.URL, source *url.URL) {
 		fmt.Println(err)
 		return
 	}
+	if endpoint == nil {
+		return
+	}
 	values := make(url.Values)
 	values.Set("source", source.String())
 	values.Set("target", target.String())
