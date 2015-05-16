@@ -38,7 +38,7 @@ type mention struct {
 	target *url.URL
 }
 
-func (wm *WebMention) GetTargetEndpoint(target url.URL) (*url.URL, error) {
+func (wm *WebMention) GetTargetEndpoint(target *url.URL) (*url.URL, error) {
 	resp, err := http.Get(target.String())
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (wm *WebMention) GetTargetEndpoint(target url.URL) (*url.URL, error) {
 	return nil, nil
 }
 
-func (wm *WebMention) SendNotification(target url.URL, source url.URL) {
+func (wm *WebMention) SendNotification(target *url.URL, source *url.URL) {
 	endpoint, err := wm.GetTargetEndpoint(target)
 	if err != nil {
 		fmt.Println(err)
